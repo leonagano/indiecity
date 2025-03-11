@@ -768,28 +768,40 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
+// Initialize the city and check for username in the URL
+function init() {
+    // Check if we have a redirected username from sessionStorage
+    const username = window.redirectUsername || '';
+    
+    // Initialize the city
+    City.initCity(scene);
+    
+    // If we have a username, center the map on their properties
+    if (username && username.length > 0 && username !== 'index.html') {
+        console.log(`Centering map on user: ${username}`);
+        centerMapOnUser(username);
+    }
+}
+
 // Function to center the map on the user's properties
 function centerMapOnUser(username) {
     const userPosition = City.getOwnerPosition(username);
     if (userPosition) {
-        // Center the camera or map on the user's properties
-        camera.position.set(userPosition.x, camera.position.y, userPosition.z + 5); // Adjust as needed
-        camera.lookAt(userPosition.x, 0, userPosition.z); // Look at the user's properties
+        console.log(`Found position for user ${username}:`, userPosition);
+        
+        // Position the character at the user's location
+        if (character) {
+            character.position.set(userPosition.x, 1, userPosition.z);
+            if (userPosition.rotation !== undefined) {
+                character.rotation.y = userPosition.rotation;
+            }
+        }
+        
+        // Center the camera on the user's properties
+        camera.position.set(userPosition.x, 5, userPosition.z + 10);
+        camera.lookAt(userPosition.x, 0, userPosition.z);
     } else {
         console.warn(`No properties found for user: ${username}`);
-    }
-}
-
-// Initialize the city and check for username in the URL
-function init() {
-    // Get the last part of the URL path as the username
-    const pathParts = window.location.pathname.split('/');
-    const username = pathParts[pathParts.length - 1]; // Get the last part of the path
-
-    City.initCity(scene); // Initialize the city
-
-    if (username && username.length > 0) {
-        centerMapOnUser(username); // Center the map on the user's properties
     }
 }
 
