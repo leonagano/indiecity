@@ -3,6 +3,14 @@
  */
 
 // Initialize Meshopt decoder before any model loading
+
+
+// Global variables
+let scene; // Declare scene globally
+
+
+
+
 function initMeshoptDecoder() {
     return new Promise((resolve) => {
         // Import the decoder
@@ -768,8 +776,6 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
-// Global variables
-let scene; // Declare scene globally
 
 // Initialize the city and check for username in the URL
 function init() {
