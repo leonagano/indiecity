@@ -7,14 +7,20 @@
     <script>
         // Get the path from the URL
         const path = window.location.pathname;
+        
         // Extract the username (last part of the path)
         const username = path.split('/').pop();
         
         // Store the username in sessionStorage
         sessionStorage.setItem('redirectUsername', username);
         
-        // Redirect to the index page
-        window.location.href = '/indiecity/';
+        // Get the base URL (remove the path)
+        const baseUrl = window.location.origin + 
+                        window.location.pathname.substring(0, 
+                        window.location.pathname.lastIndexOf('/') + 1);
+        
+        // Redirect to the index page with the base URL
+        window.location.href = baseUrl;
     </script>
 </head>
 <body>

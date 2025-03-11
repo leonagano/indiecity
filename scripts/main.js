@@ -806,4 +806,21 @@ function centerMapOnUser(username) {
 }
 
 // Call the init function when the page loads
-window.onload = init; 
+window.onload = init;
+
+// In your main.js file, add this function
+function checkForHashRedirect() {
+    // Check if we have a hash in the URL
+    if (window.location.hash) {
+        const username = window.location.hash.substring(1); // Remove the # character
+        console.log(`Found username in hash: ${username}`);
+        
+        // Center the map on the user's properties
+        if (username && username.length > 0) {
+            centerMapOnUser(username);
+        }
+    }
+}
+
+// Call this function when the page loads
+window.addEventListener('DOMContentLoaded', checkForHashRedirect); 

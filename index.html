@@ -92,6 +92,7 @@
             // Check if we have a stored username from a redirect
             const redirectUsername = sessionStorage.getItem('redirectUsername');
             if (redirectUsername) {
+                console.log(`Found redirected username: ${redirectUsername}`);
                 // Clear the stored username
                 sessionStorage.removeItem('redirectUsername');
                 // Store it as a global variable for the main.js to use
