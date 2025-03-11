@@ -768,8 +768,14 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
+// Global variables
+let scene; // Declare scene globally
+
 // Initialize the city and check for username in the URL
 function init() {
+    // Initialize the scene
+    scene = new THREE.Scene(); // Initialize the scene here
+
     // Check if we have a redirected username from sessionStorage
     const username = window.redirectUsername || '';
     
