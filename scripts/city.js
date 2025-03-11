@@ -608,6 +608,8 @@ const City = (function() {
             const ownerStartups = STARTUP_DATA.startups.filter(s => 
                 s.owner && s.owner.toLowerCase() === ownerName.toLowerCase());
             
+            console.log(`Owner startups for ${ownerName}:`, ownerStartups); // Debug log
+
             if (ownerStartups.length > 0) {
                 // Use the first startup's position
                 const firstStartup = ownerStartups[0];
@@ -624,6 +626,7 @@ const City = (function() {
                 }
             }
             
+            console.warn(`No properties found for user: ${ownerName}`); // Debug log
             return null; // Return null if no position is found
         }
     };
