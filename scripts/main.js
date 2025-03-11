@@ -812,6 +812,7 @@ function centerMapOnUser(username) {
         }
         
         // Center the camera on the user's properties
+        console.log("Camera position", camera.position);
         camera.position.set(userPosition.x, 5, userPosition.z + 10);
         camera.lookAt(userPosition.x, 0, userPosition.z);
     } else {
