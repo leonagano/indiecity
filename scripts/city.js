@@ -613,11 +613,21 @@ const City = (function() {
             if (ownerStartups.length > 0) {
                 // Use the first startup's position
                 const firstStartup = ownerStartups[0];
+                console.log(`First startup for ${ownerName}:`, firstStartup);
                 
-                // Find the plot for this startup
-                for (let i = 0; i < this.PLOTS.length; i++) {
-                    const plot = this.PLOTS[i];
-                    // Simple matching logic - just return the first plot for now
+                // Get the startup name
+                const startupName = firstStartup.name;
+                
+                // Find the position for this startup using the getStartupPosition function
+                const position = this.getStartupPosition(startupName);
+                
+                if (position) {
+                    return position;
+                }
+                
+                // If no specific position is found, use a default position
+                if (this.PLOTS.length > 0) {
+                    const plot = this.PLOTS[0];
                     return {
                         x: plot.x,
                         z: plot.z,
