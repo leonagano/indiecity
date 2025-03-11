@@ -797,9 +797,11 @@ function init() {
 
 // Function to center the map on the user's properties
 function centerMapOnUser(username) {
+    console.log(`Attempting to center map on user: ${username}`); // Debug log
     const userPosition = City.getOwnerPosition(username);
+    
     if (userPosition) {
-        console.log(`Found position for user ${username}:`, userPosition);
+        console.log(`Found position for user ${username}:`, userPosition); // Debug log
         
         // Position the character at the user's location
         if (character) {
@@ -813,7 +815,7 @@ function centerMapOnUser(username) {
         camera.position.set(userPosition.x, 5, userPosition.z + 10);
         camera.lookAt(userPosition.x, 0, userPosition.z);
     } else {
-        console.warn(`No properties found for user: ${username}`);
+        console.warn(`No properties found for user: ${username}`); // Debug log
     }
 }
 

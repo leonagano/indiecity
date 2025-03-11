@@ -624,7 +624,7 @@ const City = (function() {
                 }
             }
             
-            return null;
+            return null; // Return null if no position is found
         }
     };
 })(); 
