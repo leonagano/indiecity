@@ -777,7 +777,7 @@ function init() {
     City.initCity(scene);
     
     // If we have a username, center the map on their properties
-    if (username && username.length > 0 && username !== 'index.html') {
+    if (username && username.length > 0) {
         console.log(`Centering map on user: ${username}`);
         centerMapOnUser(username);
     }

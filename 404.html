@@ -14,13 +14,8 @@
         // Store the username in sessionStorage
         sessionStorage.setItem('redirectUsername', username);
         
-        // Get the base URL (remove the path)
-        const baseUrl = window.location.origin + 
-                        window.location.pathname.substring(0, 
-                        window.location.pathname.lastIndexOf('/') + 1);
-        
-        // Redirect to the index page with the base URL
-        window.location.href = baseUrl;
+        // Redirect to the index page
+        window.location.href = '/indie-city/'; // Adjust this to your repository name
     </script>
 </head>
 <body>
