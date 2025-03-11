@@ -187,7 +187,7 @@ const Building = (function() {
                     y: signHeight, // Position the sign just above the ground
                     z: labelZ
                 });
-                
+
                 // If the status is "onsale", add the for sale sign
                 if (startupData.status === 'onsale') {
                     const signLoader = Loaders.getGLTFLoader();
@@ -324,10 +324,14 @@ const Building = (function() {
         context.fillStyle = '#ffffff';
         context.font = 'bold 36px Arial';
         context.textAlign = 'center';
+        if (startupData.status === "sold") {
+            startupData.name = startupData.name + " (Sold)";
+        }
         context.fillText(startupData.name, canvas.width / 2, 45);
         
         // Draw MRR info (smaller font, different color based on MRR)
         var mrrText = "";
+        
         if (startupData.mrr != null && startupData.status != "failed") {
             mrrText = `$${startupData.mrr} MRR`;
             context.fillStyle = startupData.mrr > 0 ? '#4CAF50' : '#FFC107'; // Green for revenue, yellow for pre-revenue

@@ -10,24 +10,24 @@ const City = (function() {
     // Define building plots in clusters around central areas with better spacing
     const PLOTS = [
         // Cluster 1 - Northwest district (around a central plaza)
-        { x: -18, z: -18, rotation: Math.PI/4 },    // Corner plot
-        { x: -18, z: -8, rotation: 0 },             // South facing, moved further out
-        { x: -8, z: -18, rotation: Math.PI/2 },     // West facing, moved further out
+        { x: -30, z: -30, rotation: Math.PI/4 },    // Corner plot
+        { x: -30, z: -15, rotation: 0 },             // South facing, moved further out
+        { x: -15, z: -30, rotation: Math.PI/2 },     // West facing, moved further out
         
         // Cluster 2 - Northeast district (around a park)
-        { x: 18, z: -18, rotation: -Math.PI/4 },    // Corner plot
-        { x: 18, z: -8, rotation: 0 },              // South facing, moved further out
-        { x: 8, z: -18, rotation: -Math.PI/2 },     // East facing, moved further out
+        { x: 30, z: -30, rotation: -Math.PI/4 },    // Corner plot
+        { x: 30, z: -15, rotation: 0 },              // South facing, moved further out
+        { x: 15, z: -30, rotation: -Math.PI/2 },     // East facing, moved further out
         
         // Cluster 3 - Southwest district (business district)
-        { x: -18, z: 18, rotation: 3*Math.PI/4 },   // Corner plot
-        { x: -18, z: 8, rotation: Math.PI },        // North facing, moved further out
-        { x: -8, z: 18, rotation: Math.PI/2 },      // West facing, moved further out
+        { x: -30, z: 30, rotation: 3*Math.PI/4 },   // Corner plot
+        { x: -30, z: 15, rotation: Math.PI },        // North facing, moved further out
+        { x: -15, z: 30, rotation: Math.PI/2 },      // West facing, moved further out
         
         // Cluster 4 - Southeast district (financial district - for skyscraper)
-        { x: 18, z: 18, rotation: -3*Math.PI/4 },   // Corner plot - for skyscraper
-        { x: 18, z: 8, rotation: Math.PI },         // North facing, moved further out
-        { x: 8, z: 18, rotation: -Math.PI/2 }       // East facing, moved further out
+        { x: 30, z: 30, rotation: -3*Math.PI/4 },   // Corner plot - for skyscraper
+        { x: 30, z: 15, rotation: Math.PI },         // North facing, moved further out
+        { x: 15, z: 30, rotation: -Math.PI/2 }       // East facing, moved further out
     ];
     
     // Add this at the top of your city.js file
@@ -541,7 +541,7 @@ const City = (function() {
             const district = ownerDistricts[districtKey];
             const ownerStartups = startupsByOwner[owner];
             
-            // Place each startup in the owner's district
+            // Place buildings for each startup in the owner's district
             ownerStartups.forEach((startup, startupIndex) => {
                 // Use plot if available, otherwise create a new one
                 let plot;
@@ -550,9 +550,9 @@ const City = (function() {
                     // Use predefined plot
                     plot = district.plots[startupIndex];
                 } else {
-                    // Create a new plot in the district
-                    const angle = Math.random() * Math.PI * 2;
-                    const distance = 5 + Math.random() * 5;
+                    // Create a new plot in the district with increased spacing
+                    const angle = (startupIndex - district.plots.length) * (Math.PI / 4) + Math.PI/8;
+                    const distance = 10 + (startupIndex - district.plots.length) * 5; // Increase distance
                     plot = {
                         x: district.center.x + Math.cos(angle) * distance,
                         z: district.center.z + Math.sin(angle) * distance,
@@ -663,7 +663,7 @@ const City = (function() {
             } else {
                 // Create a new plot in the district (same logic as in addBuildings)
                 const angle = (startupIndex - district.plots.length) * (Math.PI / 4) + Math.PI/8;
-                const distance = 5 + (startupIndex - district.plots.length) * 2;
+                const distance = 10 + (startupIndex - district.plots.length) * 5; // Increase distance
                 plot = {
                     x: district.center.x + Math.cos(angle) * distance,
                     z: district.center.z + Math.sin(angle) * distance,

@@ -32,13 +32,13 @@ const STARTUP_DATA = {
             status: "onsale"
         },
         {
-            name: "Millions Dollar AI Homepage",
+            name: "Nera",
             website: "#",
             industry: "tech",
-            mrr: 220,
+            mrr: 100000,
             visibility: "public",
             owner: "leonagano",
-            status: "failed"
+            status: "sold"
         },
         {
             name: "JobBoardSearch",
@@ -55,6 +55,46 @@ const STARTUP_DATA = {
             mrr: 100,
             visibility: "public",
             owner: "rodrigorocco"
+        },
+        {
+            name: "Jenni.ai",
+            website: "https://jenni.com",
+            industry: "tech",
+            mrr: 644300,
+            visibility: "public",
+            owner: "davidpark"
+        },
+        {
+            name: "CodeFast",
+            website: "https://codefa.st",
+            industry: "tech",
+            mrr: 75000,
+            visibility: "public",
+            owner: "marclou"
+        },
+        {
+            name: "ShipFast",
+            website: "https://shipfa.st",
+            industry: "tech",
+            mrr: 29200,
+            visibility: "public",
+            owner: "marclou"
+        },
+        {
+            name: "DataFast",
+            website: "https://datafa.st",
+            industry: "tech",
+            mrr: 1900,
+            visibility: "public",
+            owner: "marclou"
+        },
+        {
+            name: "Zenvoice",
+            website: "https://zenvoice.io",
+            industry: "tech",
+            mrr: 394,
+            visibility: "public",
+            owner: "marclou"
         },
     ]
 }; 

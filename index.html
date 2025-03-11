@@ -16,7 +16,15 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/DRACOLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/objects/Sky.js"></script>
-    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RXR1NKJQ85"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-RXR1NKJQ85');
+    </script>
     <style>
         body {
             margin: 0;
@@ -109,9 +117,7 @@
             <div id="welcome-panel" class="panel">
                 <h1>Welcome to Indie City</h1>
                 <p>A 3D space to showcase your startups</p>
-                <p>Click on a sign to view the website</p>
-                <button id="start-btn">Enter Your City</button>
-                <button id="load-city-btn">Load Shared City</button>
+                <button id="start-btn">Enter the City</button>
             </div>
             
             <div id="startup-form" class="panel hidden">
