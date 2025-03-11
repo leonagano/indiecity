@@ -805,7 +805,7 @@ function centerMapOnUser(username) {
         
         // Position the character at the user's location
         if (character) {
-            character.position.set(userPosition.x - 50, 1, userPosition.z);
+            character.position.set(userPosition.x, 1, userPosition.z);
             if (userPosition.rotation !== undefined) {
                 character.rotation.y = userPosition.rotation;
             }
