@@ -588,20 +588,96 @@ const City = (function() {
         getStartupPosition: function(startupName) {
             // Find the startup in the data
             const startup = STARTUP_DATA.startups.find(s => s.name === startupName);
-            if (!startup) return null;
+            if (!startup) {
+                console.warn(`Startup not found: ${startupName}`);
+                return null;
+            }
             
-            // Find the plot for this startup
-            for (let i = 0; i < this.PLOTS.length; i++) {
-                const plot = this.PLOTS[i];
-                // Simple matching logic - just return the first plot for now
-                // We'll improve this later
-                return {
-                    x: plot.x,
-                    z: plot.z,
-                    rotation: plot.rotation
+            console.log(`Found startup: ${startupName}`, startup);
+            
+            // Find the owner of this startup
+            const owner = startup.owner || 'unknown';
+            
+            // Get all startups by this owner
+            const ownerStartups = STARTUP_DATA.startups.filter(s => 
+                s.owner && s.owner.toLowerCase() === owner.toLowerCase());
+            
+            // Find the index of this startup in the owner's list
+            const startupIndex = ownerStartups.findIndex(s => s.name === startupName);
+            
+            // Determine which district this owner belongs to
+            const ownerIndex = Object.keys(STARTUP_DATA.startups.reduce((acc, s) => {
+                if (s.owner) acc[s.owner] = true;
+                return acc;
+            }, {})).indexOf(owner);
+            
+            // Define district positions (same as in addBuildings)
+            const districts = [
+                // Northwest district
+                {
+                    center: { x: -15, z: -15 },
+                    plots: [
+                        { x: -18, z: -18, rotation: Math.PI/4 },
+                        { x: -18, z: -8, rotation: 0 },
+                        { x: -8, z: -18, rotation: Math.PI/2 }
+                    ]
+                },
+                // Northeast district
+                {
+                    center: { x: 15, z: -15 },
+                    plots: [
+                        { x: 18, z: -18, rotation: -Math.PI/4 },
+                        { x: 18, z: -8, rotation: 0 },
+                        { x: 8, z: -18, rotation: -Math.PI/2 }
+                    ]
+                },
+                // Southwest district
+                {
+                    center: { x: -15, z: 15 },
+                    plots: [
+                        { x: -18, z: 18, rotation: 3*Math.PI/4 },
+                        { x: -18, z: 8, rotation: Math.PI },
+                        { x: -8, z: 18, rotation: Math.PI/2 }
+                    ]
+                },
+                // Southeast district
+                {
+                    center: { x: 15, z: 15 },
+                    plots: [
+                        { x: 18, z: 18, rotation: -3*Math.PI/4 },
+                        { x: 18, z: 8, rotation: Math.PI },
+                        { x: 8, z: 18, rotation: -Math.PI/2 }
+                    ]
+                }
+            ];
+            
+            // Get the district for this owner
+            const districtIndex = ownerIndex % districts.length;
+            const district = districts[districtIndex];
+            
+            // Get the plot for this startup
+            let plot;
+            if (startupIndex < district.plots.length) {
+                // Use predefined plot
+                plot = district.plots[startupIndex];
+            } else {
+                // Create a new plot in the district (same logic as in addBuildings)
+                const angle = (startupIndex - district.plots.length) * (Math.PI / 4) + Math.PI/8;
+                const distance = 5 + (startupIndex - district.plots.length) * 2;
+                plot = {
+                    x: district.center.x + Math.cos(angle) * distance,
+                    z: district.center.z + Math.sin(angle) * distance,
+                    rotation: angle + Math.PI // Face toward district center
                 };
             }
-            return null;
+            
+            console.log(`Position for startup ${startupName}:`, plot);
+            
+            return {
+                x: plot.x,
+                z: plot.z,
+                rotation: plot.rotation
+            };
         },
         getOwnerPosition: function(ownerName) {
             // Find any startup by this owner
